@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <h1>Login</h1> -->
+    <!-- <Home /> -->
+    <!-- <Login /> -->
+
+    <div>
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios'
+// import { response } from 'express';
+// import Home from './components/Home.vue'
+// import Login from './components/Login.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // Home,
+    // Login
+  },
+
+  async created() {
+    const response = await axios.get('user');
+
+    // this.user = response.data;
+    this.$store.dispatch('user', response.data);
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
